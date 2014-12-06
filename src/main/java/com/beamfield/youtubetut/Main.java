@@ -13,12 +13,14 @@ import net.minecraft.item.ItemArmor;
 
 import com.beamfield.youtubetut.eventhandler.TutorialHandler;
 import com.beamfield.youtubetut.proxy.CommonProxy;
+import com.beamfield.youtubetut.worldgen.TutorialWorldGen;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 
@@ -44,6 +46,9 @@ public class Main {
 	public static Item tutorialLeggings;
 	public static Item tutorialBoots;
 	
+	public static Block tutorialOre;
+	TutorialWorldGen eventWorldGen = new TutorialWorldGen();
+	
 	public static ItemArmor.ArmorMaterial TutorialMaterialArmor = EnumHelper.addArmorMaterial("TutorialMaterialArmor", 17, new int[]{2, 6, 5, 2},9);
 	
 	//CreativeTab:
@@ -59,6 +64,7 @@ public class Main {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
 		ModRegistry.preInit();
+		GameRegistry.registerWorldGenerator(new TutorialWorldGen(), 1);
 	}
 	@EventHandler
 	public void init(FMLInitializationEvent event){

@@ -5,12 +5,15 @@ import static com.beamfield.youtubetut.Reference.texturePrefix;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
+import com.beamfield.youtubetut.block.BlockTutorialOre;
 import com.beamfield.youtubetut.block.TutorialBlock;
 import com.beamfield.youtubetut.item.ItemTutorialArmor;
 import com.beamfield.youtubetut.item.ItemTutorialAxe;
@@ -27,6 +30,11 @@ public class ModRegistry {
 		System.out.println(Reference.MODNAME + "pre betoltodott!");
 		tutorialItem = new Item().setTextureName(texturePrefix+"tutorialItem").setCreativeTab(tabTutorial).setUnlocalizedName("tutorialItem").setMaxStackSize(13);
 		tutorialBlock = new TutorialBlock(Material.rock).setBlockTextureName(texturePrefix+"tutorialBlock").setBlockName("tutorialBlock").setLightLevel(14f).setCreativeTab(tabTutorial).setHardness(6f).setResistance(6f);
+		tutorialOre = new BlockTutorialOre(Material.rock).setHardness(3F).setResistance(3F).setStepSound(Block.soundTypeStone).setBlockTextureName(texturePrefix+"tutorialOre").setBlockName("tutorialOre").setCreativeTab(tabTutorial);
+		GameRegistry.registerBlock(tutorialOre, "tutorialOre");
+		LanguageRegistry.addName(tutorialOre, "Tutorial Ore");
+		OreDictionary.registerOre("oreTutorial", tutorialOre);
+		GameRegistry.addSmelting(new ItemStack(Main.tutorialOre).getItem(), new ItemStack(Main.tutorialItem, 4), 0.15F);
 		GameRegistry.registerItem(tutorialItem, "tutorialItem");
 		GameRegistry.registerBlock(tutorialBlock, "tutorialBlock");
 		GameRegistry.addShapelessRecipe(new ItemStack(Main.tutorialItem, 7), Items.diamond, Blocks.bedrock);
